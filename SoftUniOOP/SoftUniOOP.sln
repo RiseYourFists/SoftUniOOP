@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farm", "Farm\Farm.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inheritance", "Inheritance", "{4E52EE88-26E8-414A-9998-3446F89A0A5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomRandomList", "RandomList\CustomRandomList.csproj", "{A4CEC8C3-F52A-4978-A38F-18F1391460B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,9 +19,17 @@ Global
 		{195C759A-F477-4186-B00F-EB5D2B6E2269}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{195C759A-F477-4186-B00F-EB5D2B6E2269}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{195C759A-F477-4186-B00F-EB5D2B6E2269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4CEC8C3-F52A-4978-A38F-18F1391460B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4CEC8C3-F52A-4978-A38F-18F1391460B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4CEC8C3-F52A-4978-A38F-18F1391460B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4CEC8C3-F52A-4978-A38F-18F1391460B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{195C759A-F477-4186-B00F-EB5D2B6E2269} = {4E52EE88-26E8-414A-9998-3446F89A0A5A}
+		{A4CEC8C3-F52A-4978-A38F-18F1391460B5} = {4E52EE88-26E8-414A-9998-3446F89A0A5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {367E8581-6315-4034-B11B-19E6D0E45442}
