@@ -14,6 +14,10 @@ namespace Farm
             pup.Eat();
             pup.Bark();
             pup.Weep();
+
+            Cat cat = new Cat();
+            cat.Eat();
+            cat.Meow();
         }
     }
 }
