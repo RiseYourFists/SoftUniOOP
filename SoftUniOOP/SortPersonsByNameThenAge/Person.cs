@@ -6,11 +6,12 @@ namespace PersonsInfo
 {
     public class Person
     {
-        public Person(string firstName, string lastName, int age)
+        public Person(string firstName, string lastName, int age, decimal salary)
         {
             FirstName = firstName;
             LastName = lastName;
             Age = age;
+            Salary = salary;
         }
 
         public string FirstName { get; private set; }
@@ -19,7 +20,17 @@ namespace PersonsInfo
 
         public int Age { get; private set; }
 
+        public decimal Salary { get; private set; }
+
         public override string ToString()
-            => $"{FirstName} {LastName} is {Age} years old.";
+            => $"{FirstName} {LastName} receives {Salary:f2} leva.";
+
+        public void IncreaseSalary(decimal percentage)
+        {
+            if (Age < 30) 
+                percentage /= 2;
+
+            Salary += Salary * (percentage / 100);
+        }
     }
 }
