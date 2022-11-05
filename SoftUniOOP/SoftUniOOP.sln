@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Encapsulation", "Encapsulat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonsInfo", "SortPersonsByNameThenAge\PersonsInfo.csproj", "{9CBA8BC2-6CC0-45DE-96B1-134FB7E87622}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassBoxData", "ClassBoxData\ClassBoxData.csproj", "{C4A1FEBF-FDEA-44B0-A3B6-3E86A763EC6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{9CBA8BC2-6CC0-45DE-96B1-134FB7E87622}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CBA8BC2-6CC0-45DE-96B1-134FB7E87622}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CBA8BC2-6CC0-45DE-96B1-134FB7E87622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A1FEBF-FDEA-44B0-A3B6-3E86A763EC6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A1FEBF-FDEA-44B0-A3B6-3E86A763EC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A1FEBF-FDEA-44B0-A3B6-3E86A763EC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A1FEBF-FDEA-44B0-A3B6-3E86A763EC6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{1A0332F6-54DE-455B-B166-9CA88532996F} = {4E52EE88-26E8-414A-9998-3446F89A0A5A}
 		{90DC47DA-732B-4E86-A639-3782D17F8866} = {4E52EE88-26E8-414A-9998-3446F89A0A5A}
 		{9CBA8BC2-6CC0-45DE-96B1-134FB7E87622} = {32CDF01B-8AF0-4546-AF93-37B8ED275FA0}
+		{C4A1FEBF-FDEA-44B0-A3B6-3E86A763EC6F} = {32CDF01B-8AF0-4546-AF93-37B8ED275FA0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {367E8581-6315-4034-B11B-19E6D0E45442}
