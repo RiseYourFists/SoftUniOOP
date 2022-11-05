@@ -50,6 +50,8 @@ namespace PersonsInfo
             {
                 if (value <= 0)
                     throw new ArgumentException("Age cannot be zero or a negative integer!");
+
+                age = value;
             }
         }
 
