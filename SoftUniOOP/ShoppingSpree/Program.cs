@@ -16,7 +16,7 @@ namespace ShoppingSpree
                 foreach (var person in peopleTokens)
                 {
                     var tokens = person.Split('=');
-                    var newPerson = new Person(tokens[0], double.Parse(tokens[1]));
+                    var newPerson = new Person(tokens[0], decimal.Parse(tokens[1]));
                     if (!people.ContainsKey(tokens[0]))
                         people.Add(tokens[0], newPerson);
                 }
@@ -25,7 +25,7 @@ namespace ShoppingSpree
                 foreach (var product in products)
                 {
                     var tokens = product.Split('=');
-                    var newProduct = new Product(tokens[0], double.Parse(tokens[1]));
+                    var newProduct = new Product(tokens[0], decimal.Parse(tokens[1]));
                     if (!shop.ContainsKey(tokens[0]))
                         shop.Add(tokens[0], newProduct);
                 }
@@ -41,6 +41,7 @@ namespace ShoppingSpree
             while ((command = Console.ReadLine()) != "END")
             {
                 var tokens = command.Split(' ');
+                if(people.ContainsKey(tokens[0]) && shop.ContainsKey(tokens[1]))
                 people[tokens[0]].BuyProduct(shop[tokens[1]]);
             }
 

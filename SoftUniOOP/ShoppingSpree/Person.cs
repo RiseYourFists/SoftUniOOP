@@ -6,13 +6,15 @@ namespace ShoppingSpree
     public class Person
     {
         private string name;
-        private double money;
+        private decimal money;
+        private List<Product> bagOfProducts;
 
-        public Person(string name, double money)
+
+        public Person(string name, decimal money)
         {
             Name = name;
             Money = money;
-            BagOfProducts = new List<Product>();
+            bagOfProducts = new List<Product>();
         }
 
         public string Name
@@ -20,13 +22,13 @@ namespace ShoppingSpree
             get => name;
             private set
             {
-                if (value.Length == 0)
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Name cannot be empty");
                 name = value;
             }
         }
 
-        public double Money 
+        public decimal Money 
         {
             get => money;
             private set
@@ -37,13 +39,12 @@ namespace ShoppingSpree
             }
         }
 
-        private List<Product> BagOfProducts { get; set; }
 
         public void BuyProduct(Product product)
         {
             if (money - product.Cost >= 0)
             {
-                BagOfProducts.Add(product);
+                bagOfProducts.Add(product);
                 Console.WriteLine($"{name} bought {product.Name}");
                 money -= product.Cost;
                 return;
@@ -53,7 +54,7 @@ namespace ShoppingSpree
 
         public void ShowBasket()
         {
-            var list = (BagOfProducts.Count > 0) ? GetProducts() : "Nothing bought";
+            var list = (bagOfProducts.Count > 0) ? GetProducts() : "Nothing bought";
 
             Console.WriteLine($"{name} - {list}");
         }
@@ -61,7 +62,7 @@ namespace ShoppingSpree
         private string GetProducts()
         {
             var products = new List<string>();
-            BagOfProducts.ForEach(x => products.Add(x.Name));
+            bagOfProducts.ForEach(x => products.Add(x.Name));
             return string.Join(", ", products);
         }
     }
