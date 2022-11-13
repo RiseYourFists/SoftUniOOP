@@ -9,7 +9,7 @@ namespace BorderControl
     {
         static void Main(string[] args)
         {
-            var IDs = new List<IIdentifiable>();
+            var IDs = new List<IBirthable>();
 
             string command;
 
@@ -17,20 +17,23 @@ namespace BorderControl
             {
                 var info = command.Split();
 
-                if (info.Length == 3)
+                switch (info[0])
                 {
-                    IDs.Add(new Human(info[0], info[1], info[2]));  
-                }
-                else if (info.Length == 2)
-                {
-                    IDs.Add(new Robot(info[0], info[1]));
+                    case "Citizen":
+                        var datetime = info[4].Split('/').Select(int.Parse).ToList();
+                        IDs.Add(new Human(info[1], info[2], info[3],new DateTime(datetime[2], datetime[1], datetime[0])));
+                        break;
+                    case "Pet":
+                        datetime = info[2].Split('/').Select(int.Parse).ToList();
+                        IDs.Add(new Pet(info[1], new DateTime(datetime[2], datetime[1], datetime[0])));
+                        break;
                 }
             }
 
-            var fakeID = Console.ReadLine();
-            var fakeIDs = IDs.Where(x => x.Id[(x.Id.Length - fakeID.Length)..] == fakeID).ToList();
-
-            fakeIDs.ForEach(x => Console.WriteLine(x.Id));
+            var year = int.Parse(Console.ReadLine());
+            var birthdays = IDs.Where(x => x.BirthDate.Year == year).ToList();
+            if (birthdays.Count > 0)
+                birthdays.ForEach(x => Console.WriteLine(x.GetYear()));
         }
     }
 }

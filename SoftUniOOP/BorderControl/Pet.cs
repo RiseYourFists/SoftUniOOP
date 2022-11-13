@@ -1,23 +1,19 @@
 ﻿using BorderControl.Contracts;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace BorderControl
 {
-    public class Human : IIdentifiable, IBirthable
+    public class Pet : IBirthable
     {
-        public Human(string name, string age, string id, DateTime birthDate)
+        public Pet(string name, DateTime birthDate)
         {
             Name = name;
-            Age = age;
-            Id = id;
             BirthDate = birthDate;
         }
 
         public string Name { get; set; }
-
-        public string Age { get; set; }
-
-        public string Id { get; set; }
 
         public DateTime BirthDate { get; set; }
 
