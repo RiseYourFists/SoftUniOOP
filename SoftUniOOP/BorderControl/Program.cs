@@ -9,31 +9,42 @@ namespace BorderControl
     {
         static void Main(string[] args)
         {
-            var IDs = new List<IBirthable>();
+            var IDs = new Dictionary<string, IBuyable>();
 
-            string command;
+            var n = int.Parse(Console.ReadLine());
 
-            while ((command = Console.ReadLine()) != "End")
+            for(int i = 0; i < n; i++)    
             {
-                var info = command.Split();
+                var info = Console.ReadLine().Split();
 
-                switch (info[0])
+                switch (info.Length)
                 {
-                    case "Citizen":
-                        var datetime = info[4].Split('/').Select(int.Parse).ToList();
-                        IDs.Add(new Human(info[1], info[2], info[3],new DateTime(datetime[2], datetime[1], datetime[0])));
+                    case 4:
+                        if (!IDs.ContainsKey(info[0]))
+                        {
+                            var datetime = info[3].Split('/').Select(int.Parse).ToList();
+                            IDs.Add(info[0], new Citizen(info[0], info[1], info[2], new DateTime(datetime[2], datetime[1], datetime[0])));
+                        }
                         break;
-                    case "Pet":
-                        datetime = info[2].Split('/').Select(int.Parse).ToList();
-                        IDs.Add(new Pet(info[1], new DateTime(datetime[2], datetime[1], datetime[0])));
+                    case 3:
+                        if (!IDs.ContainsKey(info[0]))
+                        {
+                            IDs.Add(info[0], new Rebel(info[0], info[1], info[2]));
+                        }
                         break;
                 }
             }
 
-            var year = int.Parse(Console.ReadLine());
-            var birthdays = IDs.Where(x => x.BirthDate.Year == year).ToList();
-            if (birthdays.Count > 0)
-                birthdays.ForEach(x => Console.WriteLine(x.GetYear()));
+            string command;
+            while ((command = Console.ReadLine()) != "End")
+            {
+                if (IDs.ContainsKey(command))
+                {
+                    IDs[command].BuyFood();
+                }
+            }
+
+            Console.WriteLine(IDs.Values.Sum(x => x.FoodSupply));
         }
     }
 }

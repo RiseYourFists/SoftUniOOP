@@ -3,9 +3,9 @@ using System;
 
 namespace BorderControl
 {
-    public class Human : IIdentifiable, IBirthable
+    public class Citizen : IIdentifiable, IBirthable, IBuyable
     {
-        public Human(string name, string age, string id, DateTime birthDate)
+        public Citizen(string name, string age, string id, DateTime birthDate)
         {
             Name = name;
             Age = age;
@@ -20,6 +20,13 @@ namespace BorderControl
         public string Id { get; set; }
 
         public DateTime BirthDate { get; set; }
+
+        public int FoodSupply { get; set; }
+
+        public void BuyFood()
+        {
+            FoodSupply += 10;
+        }
 
         public string GetYear()
             => $"{BirthDate.Day:d2}/{BirthDate.Month:d2}/{BirthDate.Year}";
