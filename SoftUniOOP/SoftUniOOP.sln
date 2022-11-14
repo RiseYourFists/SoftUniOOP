@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathsOperations", "MathsOpe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animals", "Animals\Animals.csproj", "{B945D094-1A02-4EDB-BFA1-5EE001FFFE40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shape", "Shape\Shape.csproj", "{E3CE0D44-D74A-4EC1-9D88-FC10CE394634}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,10 @@ Global
 		{B945D094-1A02-4EDB-BFA1-5EE001FFFE40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B945D094-1A02-4EDB-BFA1-5EE001FFFE40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B945D094-1A02-4EDB-BFA1-5EE001FFFE40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3CE0D44-D74A-4EC1-9D88-FC10CE394634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3CE0D44-D74A-4EC1-9D88-FC10CE394634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3CE0D44-D74A-4EC1-9D88-FC10CE394634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3CE0D44-D74A-4EC1-9D88-FC10CE394634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,6 +168,7 @@ Global
 		{0EE186BA-60A2-4537-8C9D-0AA076088E28} = {97C3C3ED-1CE9-4838-924D-E5AA43304D20}
 		{7359344D-F3F8-456F-87F5-38059431CEB6} = {398FB225-5DEC-4673-B2FD-1C1B7CF1A641}
 		{B945D094-1A02-4EDB-BFA1-5EE001FFFE40} = {398FB225-5DEC-4673-B2FD-1C1B7CF1A641}
+		{E3CE0D44-D74A-4EC1-9D88-FC10CE394634} = {398FB225-5DEC-4673-B2FD-1C1B7CF1A641}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {367E8581-6315-4034-B11B-19E6D0E45442}
