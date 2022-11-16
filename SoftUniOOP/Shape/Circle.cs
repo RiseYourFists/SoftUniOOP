@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class Circle : Shapes
+    public class Circle : Shape
     {
         private double radius;
 
@@ -21,6 +21,6 @@
             => Math.PI * radius * radius;
 
         public override string Draw()
-            => "This is a circle";
+            => base.Draw() + GetType().Name;
     }
 }
