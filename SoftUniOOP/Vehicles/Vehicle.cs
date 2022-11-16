@@ -1,35 +1,74 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Vehicles
 {
     public abstract class Vehicle
     {
-        
+        protected readonly Func<double, double, bool> IsValidCapacity =
+            (amount, capacity) => amount <= capacity;
 
-        protected Vehicle(double fuelQuantity, double fuelConsumption)
+        protected double fuelQuantity;
+
+        protected Vehicle(double tankCapacity, double fuelQuantity, double fuelConsumption)
         {
+            TankCapacity = tankCapacity;
             FuelQuantity = fuelQuantity;
             FuelConsumption = fuelConsumption;
         }
 
-        public double FuelQuantity { get; set; }
+        public double FuelQuantity
+        {
+            get => fuelQuantity;
+            protected set
+            {
 
-        public virtual double FuelConsumption { get; set; }
+                if (IsValidCapacity(value, TankCapacity))
+                {
+                    fuelQuantity = value;
+                    return;
+                }
+
+                fuelQuantity = 0;
+            }
+        }
+
+        public virtual double FuelConsumption { get; protected set; }
+
+        public double TankCapacity { get; private set; }
 
         public bool Drive(double distance)
         {
-            var fuelAfterDrive = FuelQuantity - distance * FuelConsumption;
+            var fuelAfterDrive = fuelQuantity - distance * FuelConsumption;
 
-            if(fuelAfterDrive < 0)
+            if (fuelAfterDrive < 0)
+            {
                 return false;
-                
-            FuelQuantity = fuelAfterDrive;
+            }
+
+            fuelQuantity = fuelAfterDrive;
             return true;
         }
 
         public virtual void Refuel(double amount)
-            => FuelQuantity += amount;
+        {
+            if (amount <= 0)
+            {
+                Console.WriteLine("Fuel must be a positive number");
+                return;
+            }
+
+            if (!IsValidCapacity(amount, TankCapacity))
+            {
+                WriteError(amount);
+                return;
+            }
+
+            fuelQuantity += amount;
+        }
+
+        protected void WriteError(double value)
+        {
+            Console.WriteLine($"Cannot fit {value} fuel in the tank");
+        }
     }
 }
