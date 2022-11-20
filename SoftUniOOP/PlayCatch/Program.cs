@@ -22,14 +22,14 @@ namespace PlayCatch
                     switch (action)
                     {
                         case "Replace":
-                            int endIndex;
+                            
                             Replace(elements, command[2], index);
                             break;
                         case "Show":
                             Show(elements, index);
                             break;
                         case "Print":
-                            endIndex = Print(elements, command, index);
+                            Print(elements, command, index);
                             break;
                     }
                 }
@@ -42,7 +42,7 @@ namespace PlayCatch
             Console.WriteLine(string.Join(", ", elements));
         }
 
-        private static int Print(int[] elements, string[] command, int index)
+        private static void Print(int[] elements, string[] command, int index)
         {
             int endIndex = TryGetIndex(command[2]);
             if (IsInRange(index, endIndex, elements))
@@ -50,8 +50,6 @@ namespace PlayCatch
                 var sheet = elements[index..(endIndex + 1)];
                 Console.WriteLine(string.Join(", ", sheet));
             }
-
-            return endIndex;
         }
 
         private static void Show(int[] elements, int index)
