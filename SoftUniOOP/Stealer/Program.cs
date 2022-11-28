@@ -8,7 +8,7 @@
         {
             var spy = new Spy();
 
-            var info = spy.StealFieldInfo("Stealer.Hacker", new string[] {"username", "password" });
+            var info = spy.AnalyzeAccessModifiers("Stealer.Hacker");
 
             Console.WriteLine(info);
         }

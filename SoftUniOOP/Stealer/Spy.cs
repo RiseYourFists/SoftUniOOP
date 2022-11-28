@@ -28,5 +28,33 @@
             return output.ToString();
 
         }
+
+        public string AnalyzeAccessModifiers(string className)
+        {
+            var typeInfo = Type.GetType(className);
+
+            var output = new StringBuilder();
+
+            var classInstance = Activator.CreateInstance(typeInfo);
+
+            var fields = typeInfo.GetFields((BindingFlags)(4|8|16));
+            var publicMethods = typeInfo.GetMethods((BindingFlags)(4 | 16));
+            var nonPublicMethods = typeInfo.GetMethods((BindingFlags)(4 | 32));
+
+            foreach (var field in fields)
+            {
+                output.AppendLine($"{field.Name} must be private");
+            }
+            foreach (var method in publicMethods.Where(p => p.Name.StartsWith("get")))
+            {
+                output.AppendLine($"{method.Name} have to be public!");
+            }
+            foreach (var method in nonPublicMethods.Where(p => p.Name.StartsWith("set")))
+            {
+                output.AppendLine($"{method.Name} have to be private!");
+            }
+
+            return output.ToString();
+        }
     }
 }
