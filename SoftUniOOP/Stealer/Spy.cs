@@ -56,5 +56,23 @@
 
             return output.ToString();
         }
+
+        public string RevealPrivateMethods(string className)
+        {
+            var output = new StringBuilder();
+
+            var typeInfo = Type.GetType(className);
+            var methods = typeInfo.GetMethods((BindingFlags)(4|32));
+
+            output.AppendLine($"All Private Methods of Class: {className}");
+            output.AppendLine($"Base Class: {typeInfo.BaseType.Name}");
+
+            foreach (var method in methods)
+            {
+                output.AppendLine(method.Name);
+            }
+
+            return output.ToString();
+        }
     }
 }
