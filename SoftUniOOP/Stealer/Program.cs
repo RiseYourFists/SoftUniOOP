@@ -8,7 +8,7 @@
         {
             var spy = new Spy();
 
-            var info = spy.RevealPrivateMethods("Stealer.Hacker");
+            var info = spy.CollectGettersAndSetters("Stealer.Hacker");
 
             Console.WriteLine(info);
         }

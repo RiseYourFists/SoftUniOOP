@@ -10,9 +10,9 @@
     {
         public string StealFieldInfo(string className, string[] fieldsToInvestigate)
         {
-            Type typeInfo = Type.GetType(className);
+            var typeInfo = Type.GetType(className);
 
-            List<FieldInfo> fields = typeInfo.GetFields((BindingFlags)62).ToList();
+            var fields = typeInfo.GetFields((BindingFlags)62).ToList();
 
             var classInstance = Activator.CreateInstance(typeInfo, new object[] { });
 
@@ -71,6 +71,27 @@
             {
                 output.AppendLine(method.Name);
             }
+
+            return output.ToString();
+        }
+
+        public string CollectGettersAndSetters(string className)
+        {
+            var output = new StringBuilder();
+
+            var typeInfo = Type.GetType(className);
+
+            var methods = typeInfo.GetMethods((BindingFlags)60);
+
+            foreach (var method in methods.Where(m => m.Name.StartsWith("get")))
+            {
+                output.AppendLine($"{method.Name} will return {method.ReturnType}");
+            }
+            foreach (var method in methods.Where(m => m.Name.StartsWith("set")))
+            {
+                output.AppendLine($"{method.Name} will set field of {method.MetadataToken.GetType()}");
+            }
+
 
             return output.ToString();
         }
