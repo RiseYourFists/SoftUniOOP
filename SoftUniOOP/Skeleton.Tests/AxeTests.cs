@@ -7,15 +7,7 @@ namespace Skeleton.Tests
     public class AxeTests
     {
         [Test]
-        public void Test1()
-        {
-            Test_If_Axe_Loses_Durability_After_Attack();
-
-            Test_Attacking_With_Broken_Axe();
-        }
-
-
-        private void Test_If_Axe_Loses_Durability_After_Attack()
+        public void Test_If_Axe_Loses_Durability_After_Attack()
         {
             var axe = new Axe(10, 10);
 
@@ -24,7 +16,8 @@ namespace Skeleton.Tests
             Assert.AreEqual(9, axe.DurabilityPoints, "Axe Durability doesn't change after attack.");
         }
 
-        private void Test_Attacking_With_Broken_Axe()
+        [Test]
+        public void Test_Attacking_With_Broken_Axe()
         {
             var axe = new Axe(10, 0);
 
