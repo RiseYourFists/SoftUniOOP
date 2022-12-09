@@ -4,191 +4,160 @@ namespace DatabaseExtended.Tests
     using NUnit.Framework;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
+
+
 
     [TestFixture]
     public class ExtendedDatabaseTests
     {
-        private enum CollectionType
-        {
-            Full,
-            Empty,
-            OutOfRange,
-            HasOne
-        }
 
-        [TestCaseSource(
-            typeof(PersonCollectionGenerator), 
-            "GetCollection",
-            new object[] { new CollectionType[] { CollectionType.Full, CollectionType.HasOne } })]
+        // Capacity tests
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 1 })]// Test 1
+        public void Test_ConstructorArgs_OutOfRange(Person[] people)
+            => Assert.Throws<ArgumentException>(() => new Database(people));
 
-        public void Test_Capacity_Possitive(Person[] people)
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 2 })]// Test 2
+        public void Test_Capacity_OutOfRange(Person[] people)
         {
             var database = new Database(people);
-            var expectedOutput = people.Length;
-            Assert.AreEqual(expectedOutput, database.Count);
+            Assert.Throws<InvalidOperationException>(() => database.Add(new Person(1000, "Mary")));
         }
 
-        [TestCaseSource(
-            typeof(PersonCollectionGenerator),
-            "GetCollection",
-            new object[] { new CollectionType[] { CollectionType.OutOfRange } })]
-
-        public void Test_Capacity_Negative(Person[] people)
-        {
-            Assert.Throws<ArgumentException>(() => new Database(people));
-        }
-
-        [TestCaseSource(
-            typeof(PersonCollectionGenerator),
-            "GetCollection",
-            new object[]{ new CollectionType[] { CollectionType.Full }})]
-
-        public void Test_If_Database_ThrowsException_WhenAddingTo_FullCollection(Person[] people)
+        // Add operation tests
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 3 })]// Test 3
+        public void Test_AddOperation_AlreadyHasExisting_PersonName(Person[] people)
         {
             var database = new Database(people);
-
-            Assert.Throws<InvalidOperationException>(() => database.Add(new Person(0, "Bobster")));
+            Assert.Throws<InvalidOperationException>(() => database.Add(new Person(1000, "1 Bob")));
         }
 
-        [Test]
-        public void Test_IfDatabaseStoresValueOnNextFreeCell()
-        {
-            var database = new Database();
-
-            database.Add(new Person(1, "Foo"));
-
-            Assert.IsTrue(database.Count == 1);
-        }
-
-        [TestCaseSource(
-            typeof(PersonCollectionGenerator),
-            "GetCollection",
-            new object[] { new CollectionType[] { CollectionType.Full } })]
-
-        public void Test_If_RemoveMethodRemoves_LastItem(Person[] people)
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 4 })]// Test 4
+        public void Test_AddOperation_AlreadyHasExisting_PersonID(Person[] people)
         {
             var database = new Database(people);
+            Assert.Throws<InvalidOperationException>(() => database.Add(new Person(1, "1000 Bob")));
+        }
 
+        // Remove operation tests
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 5 })]// Test 5
+        public void Test_RemoveOperation_ShouldRemove_LastElement_InCollection(Person[] people, string expectedOutput, int expectedCount)
+        {
+            var database = new Database(people);
             database.Remove();
-
-            Assert.Throws<InvalidOperationException>(() => database.FindById(15));
+            Assert.AreEqual(expectedCount, database.Count);
+            Assert.AreEqual(expectedOutput, database.FindByUsername(expectedOutput).UserName);
         }
 
-        [Test]
-        public void Test_IfDatabaseThrowsExceptionWhenRemovingFromEmptyCollection()
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 6 })]// Test 6
+        public void Test_RemoveOperation_OnEmptyCollection(Person[] people)
         {
-            var database = new Database();
-
+            var database = new Database(people);
             Assert.Throws<InvalidOperationException>(() => database.Remove());
         }
 
-        [TestCaseSource(
-            typeof(PersonCollectionGenerator),
-            "GetCollection",
-            new object[] { new CollectionType[] { CollectionType.HasOne } })]
-
-        public void Test_If_AddThrowsException_OnExistingData(Person[] people)
-        {
-            var dataBase = new Database(people);
-
-            Assert.Throws<InvalidOperationException>(() => dataBase.Add(new Person(0, "Bobster")));
-            Assert.Throws<InvalidOperationException>(() => dataBase.Add(new Person(3, "Bob0")));
-        }
-
-        [TestCaseSource(
-            typeof(PersonCollectionGenerator),
-            "GetCollection",
-            new object[] { new CollectionType[] { CollectionType.HasOne } })]
-
-        public void Test_FindByUser_Negative(Person[] people)
+        // Find by name tests
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 7 })]// Test 7
+        public void Test_FindByName_ArgsAreNull(Person[] people)
         {
             var database = new Database(people);
-
             Assert.Throws<ArgumentNullException>(() => database.FindByUsername(null));
-            Assert.Throws<InvalidOperationException>(() => database.FindByUsername("Willy"));
         }
 
-        [TestCaseSource(
-            typeof(PersonCollectionGenerator),
-            "GetCollection",
-            new object[] { new CollectionType[] { CollectionType.HasOne } })]
-
-        public void Test_FindByID_Negative(Person[] people)
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 8 })]// Test 8
+        public void Test_FindByName_NotExistantInDB(Person[] people)
         {
             var database = new Database(people);
+            Assert.Throws<InvalidOperationException>(() => database.FindByUsername("Dean"));
+        }
 
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 9 })]// Test 9
+        public void Test_FindByName_CaseSensitiveArgs(Person[] people)
+        {
+            var database = new Database(people);
+            var lowerCase = database.FindById(1).UserName.ToLower();
+            bool isCaseSensitive = lowerCase == database.FindById(1).UserName;
+            Assert.IsTrue(!isCaseSensitive);
+        }
+
+        // Find by ID tests
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 10 })]// Test 10
+        public void Test_FindByID_NotExistantInDB(Person[] people)
+        {
+            var database = new Database(people);
+            Assert.Throws<InvalidOperationException>(() => database.FindById(100));
+        }
+
+        [TestCaseSource(typeof(TestData), "GetData", new object[] { 11 })]// Test 11
+        public void Test_FindByID_InvalidNegativeID(Person[] people)
+        {
+            var database = new Database(people);
             Assert.Throws<ArgumentOutOfRangeException>(() => database.FindById(-1));
-            Assert.Throws<InvalidOperationException>(() => database.FindById(10));
         }
 
-
-        [Test]
-        public void Test_If_ClassHasAllMethods()
+        private class TestData
         {
-            var typeInfo = typeof(Database);
-
-            var methods = typeInfo.GetMethods((BindingFlags)60);
-            var methodNames = methods.Select(m => m.Name).ToList();
-
-            var requiredMethods = new string[] { "Add", "Remove", "FindById", "FindByUsername"};
-
-            foreach (var item in requiredMethods)
+            private static IEnumerable<TestCaseData> GetData(int testNumber)
             {
-                if (!methodNames.Contains(item))
+                TestCaseData data = null;
+                switch (testNumber)
                 {
-                    Assert.Fail();
+                    case 1:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.OutOfRange) });
+                        break;
+                    case 2:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.Full) });
+                        break;
+                    case 3:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.HasOne) });
+                        break;
+                    case 4:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.HasOne) });
+                        break;
+                    case 5:
+                        data = new TestCaseData(GeneratePeople(CSize.Full), "15 Bob", 15);
+                        break;
+                    case 6:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.Empty) });
+                        break;
+                    case 7:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.HasOne) });
+                        break;
+                    case 8:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.HasOne) });
+                        break;
+                    case 9:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.HasOne) });
+                        break;
+                    case 10:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.HasOne) });
+                        break;
+                    case 11:
+                        data = new TestCaseData(new[] { GeneratePeople(CSize.HasOne) });
+                        break;
                 }
+                yield return data;
             }
 
-            Assert.Pass();
-        }
-
-        private class PersonCollectionGenerator
-        {
-            private static IEnumerable<TestCaseData> GetCollection(params CollectionType[] collectionType)
+            enum CSize
             {
-                Person[] people;
-                var data = new List<TestCaseData>();
-
-                foreach (var type in collectionType)
-                {
-                    switch (type)
-                    {
-                        case CollectionType.Full:
-                            people = CreatePeople(16);
-                            break;
-                        case CollectionType.HasOne:
-                            people = CreatePeople(1);
-                            break;
-                        case CollectionType.OutOfRange:
-                            people = CreatePeople(17);
-                            break;
-                        default:
-                            people = new Person[0];
-                            break;
-                    }
-                    data.Add(new TestCaseData(new[] { people }));
-                }
-
-                foreach (var testCase in data)
-                {
-                    yield return testCase;
-                }
+                Empty = 0,
+                HasOne = 1,
+                Full = 16,
+                OutOfRange = 17
             }
-
-            private static Person[] CreatePeople(int count)
+            private static Person[] GeneratePeople(CSize size)
             {
-                var people = new Person[count];
+                var people = new Person[(int)size];
 
-                for (int i = 0; i < count; i++)
+                for (int i = 0; i < (int)size; i++)
                 {
-                    people[i] = new Person(i, "Bob" + i);
+                    var id = i + 1;
+                    people[i] = new Person(id, id + " Bob");
                 }
 
                 return people;
             }
         }
+
     }
 }
