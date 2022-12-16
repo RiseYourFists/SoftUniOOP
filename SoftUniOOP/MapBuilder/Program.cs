@@ -9,10 +9,10 @@ namespace MapBuilder
             var rows = 25;
             var cols = 50;
             var OutPutPath = @"../../../Maps/";
-            var OutPutFile = "../../../Maps/map1.txt";
+            var OutPutFile = "../../../Maps/map.txt";
             var builder = new SnakeMapBuilder();
 
-            bool isDone = (builder.GenerateNewMap(rows, cols, '#', OutPutFile, OutPutPath));
+            bool isDone = (builder.GenerateNewMap(rows, cols, '#', OutPutFile));
 
             if (isDone)
             {

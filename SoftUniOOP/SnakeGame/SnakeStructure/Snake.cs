@@ -1,8 +1,6 @@
 ﻿using SnakeGame.Contracts.Controller;
 using SnakeGame.Contracts.Coordination;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SnakeGame.SnakeStructure
 {

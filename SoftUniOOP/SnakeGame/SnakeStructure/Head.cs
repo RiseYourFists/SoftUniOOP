@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SnakeGame.Collisions;
+﻿using SnakeGame.Collisions;
 using SnakeGame.Contracts.Controller;
 using SnakeGame.Contracts.Coordination;
 using SnakeGame.Contracts.Renderer;

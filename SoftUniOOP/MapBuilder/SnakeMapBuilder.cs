@@ -6,11 +6,12 @@ namespace MapBuilder
     internal class SnakeMapBuilder
     {
 
-        public bool GenerateNewMap(int rows, int cols, char wallDrawingToken, string outputFile, string outPutPath)
+        public bool GenerateNewMap(int rows, int cols, char wallDrawingToken, string outputFile)
         {
             
             using (var writer = new StreamWriter(outputFile))
             {
+                writer.WriteLine($"{rows},{cols}");
                 for (int row = 0; row < rows; row++)
                 {
                     for (int col = 0; col < cols; col++)

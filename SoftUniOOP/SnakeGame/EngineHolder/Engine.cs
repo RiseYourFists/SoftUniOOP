@@ -4,9 +4,7 @@ using SnakeGame.Contracts.Controller;
 using SnakeGame.Contracts.Engine;
 using SnakeGame.SnakeStructure;
 using SnakeGame.ControllerEngine;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using SnakeGame.MapInterpreter;
 
 namespace SnakeGame.EngineHolder
 {
@@ -14,16 +12,17 @@ namespace SnakeGame.EngineHolder
     {
         public Engine()
         {
-            isOver = false;
+            IsOver = false;
         }
 
-        public bool isOver { get; set; }
+
+        public bool IsOver { get; set; }
 
 
         public void Run()
         {
             //TODO: Implement Map
-
+            var map = new Map("../../../MapHolder/map.txt");
             Collision head = new Head('☺');
             Collision tail = new Tail('■');
             IMoveable snake = new Snake(head as Head, tail as Tail);
@@ -31,6 +30,7 @@ namespace SnakeGame.EngineHolder
 
             Collision[] collidables =
             {
+                map.Tiles as Collision,
                 snake as Collision
             };
 
@@ -41,7 +41,7 @@ namespace SnakeGame.EngineHolder
             };
 
             var controller = new Controller();
-            while (!isOver)
+            while (!IsOver)
             {
                 controller.Read();
                 controller.Move(moveables);

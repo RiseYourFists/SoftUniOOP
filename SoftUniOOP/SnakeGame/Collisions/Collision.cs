@@ -1,8 +1,5 @@
 ﻿using SnakeGame.Contracts.Coordination;
 using SnakeGame.EngineHolder;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SnakeGame.Collisions
 {
@@ -12,7 +9,7 @@ namespace SnakeGame.Collisions
 
         public virtual void OnCollisionEvent()
         {
-            isOver = !isOver;
+            IsOver = !IsOver;
         }
 
         public bool Compare(ICoordinates that)
