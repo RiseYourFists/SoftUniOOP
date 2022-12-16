@@ -10,8 +10,8 @@ namespace SnakeGame.ControllerEngine
             Dir = IDirection.Direction.STOP;
         }
 
-        public IDirection.Direction Dir { get; set; }
-        public IDirection.Direction Prev { get; set; }
+        public IDirection.Direction Dir { get; private set; }
+        public IDirection.Direction Prev { get; private set; }
 
         public void Read()
         {

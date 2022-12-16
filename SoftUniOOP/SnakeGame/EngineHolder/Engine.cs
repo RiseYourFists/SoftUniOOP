@@ -23,21 +23,21 @@ namespace SnakeGame.EngineHolder
         {
             //TODO: Implement Map
             var map = new Map("../../../MapHolder/map.txt");
-            Collision head = new Head('☺');
-            Collision tail = new Tail('■');
-            IMoveable snake = new Snake(head as Head, tail as Tail);
+            var head = new Head('☺');
+            var tail = new Tail('■');
+            var snake = new Snake(head, tail);
             var checker = new CollisionChecker();
+
 
             Collision[] collidables =
             {
                 map.Tiles as Collision,
-                snake as Collision
             };
 
             IMoveable[] moveables =
             {
-                head as IMoveable,
-               snake,
+                head,
+                snake,
             };
 
             var controller = new Controller();
@@ -46,7 +46,7 @@ namespace SnakeGame.EngineHolder
                 controller.Read();
                 controller.Move(moveables);
 
-                if (checker.HasCollided(collidables, head.Coordinates))
+                if (checker.HasCollided(collidables, head.Coordinates) || checker.HasCollided(snake.SnakeTail, head.Coordinates))
                 {
                     checker.CollidedObj.OnCollisionEvent(); //TODO: Implement OnCollisionEvent
                 }
