@@ -10,28 +10,15 @@ namespace SnakeGame.SnakeStructure
 {
     public class Tail : Collision, IDrawable
     {
-        private readonly Tail tail;
+        
 
-        public Tail(char drawableToken, int initialLength)
+        public Tail(char drawableToken)
         {
             DrawableToken = drawableToken;
-            SnakeTail = new Queue<Tail>();
         }
 
         public char DrawableToken { get; set; }
 
-        Queue<Tail> SnakeTail { get; }
-
-        public void Add(ICoordinates coordinates)
-        {
-            var segment = tail;
-            segment.Coordinates = coordinates;
-            SnakeTail.Enqueue(tail);
-        }
-
-        public void Remove()
-        {
-            SnakeTail.Dequeue();
-        }
+        
     }
 }

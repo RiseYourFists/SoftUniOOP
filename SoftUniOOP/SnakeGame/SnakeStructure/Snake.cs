@@ -8,22 +8,36 @@ namespace SnakeGame.SnakeStructure
 {
     public class Snake : IMoveable
     {
-
+        private readonly Tail tail;
 
         public Snake(Head head, Tail tail)
         {
             Head = head;
 
-            Tail = tail;
+            this.tail = tail;
+
+            SnakeTail = new Queue<Tail>();
         }
 
         Head Head { get; }
 
-        Tail Tail { get; }
+        Queue<Tail> SnakeTail { get; }
+
+        public void Add(ICoordinates coordinates)
+        {
+            var segment = tail;
+            segment.Coordinates = coordinates;
+            SnakeTail.Enqueue(tail);
+        }
+
+        public void Remove()
+        {
+            SnakeTail.Dequeue();
+        }
 
         public void UpdatePos(IDirection.Direction direction)
         {
-            Tail.Remove();
+            this.Remove();
             ICoordinates newCoords = Head.Coordinates;
 
             switch (direction)
@@ -41,7 +55,7 @@ namespace SnakeGame.SnakeStructure
                     newCoords.XAxis--;
                     break;
             }
-            Tail.Add(newCoords);
+            this.Add(newCoords);
         }
     }
 }

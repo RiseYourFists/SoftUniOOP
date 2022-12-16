@@ -25,7 +25,7 @@ namespace SnakeGame.EngineHolder
             //TODO: Implement Map
 
             Collision head = new Head('☺');
-            Collision tail = new Tail('■', 2);
+            Collision tail = new Tail('■');
             IMoveable snake = new Snake(head as Head, tail as Tail);
             var checker = new CollisionChecker();
 
