@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using Snake.Interfaces;
+﻿using Snake.Interfaces;
 using System.Linq;
 using System.Threading;
 
