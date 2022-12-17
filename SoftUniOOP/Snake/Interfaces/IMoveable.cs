@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snake.Enumerators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Snake.Interfaces
 {
     public interface IMoveable
     {
-        void UpdatePos();
+        void UpdatePos(Direction direction);
     }
 }

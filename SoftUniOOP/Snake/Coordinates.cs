@@ -10,6 +10,12 @@ namespace Snake
             YAxis = yAxis;
         }
 
+        public Coordinates(ICoordinates coordinates)
+        {
+            XAxis = coordinates.XAxis;
+            YAxis = coordinates.YAxis;
+        }
+
         public int XAxis { get; set; }
 
         public int YAxis { get; set; }

@@ -22,7 +22,12 @@ namespace Snake
             GameState.GameOver();
         }
 
-        bool Compare(ICoordinates other)
+        public void ModifyCoords(ICoordinates coordinates)
+        {
+            Coordinates = coordinates;
+        }
+
+        public bool Compare(ICoordinates other)
             => this.Coordinates.YAxis == other.YAxis
             && this.Coordinates.XAxis == other.XAxis;
     }

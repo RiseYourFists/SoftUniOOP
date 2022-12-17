@@ -8,5 +8,11 @@ namespace Snake
             : base(coordinates, gameState, drawableToken)
         {
         }
+
+        public Tail(Tail collisionObject)
+            : base(collisionObject.Coordinates, collisionObject.GameState, collisionObject.DrawableToken)
+        { 
+        }
+
     }
 }
