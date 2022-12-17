@@ -1,6 +1,6 @@
-﻿using SnakeGame.Contracts.Coordination;
+﻿using Snake.Interfaces;
 
-namespace SnakeGame.Collisions
+namespace Snake
 {
     public class Coordinates : ICoordinates
     {
@@ -11,6 +11,7 @@ namespace SnakeGame.Collisions
         }
 
         public int XAxis { get; set; }
+
         public int YAxis { get; set; }
     }
 }

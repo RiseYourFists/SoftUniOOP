@@ -20,7 +20,7 @@ namespace SnakeGame.SnakeStructure
 
         Head Head { get; }
 
-        public Tail[] SnakeTail => snakeTail.ToArray();
+        public IReadOnlyCollection<Tail> SnakeTail => snakeTail.ToArray();
 
         private void Add(ICoordinates coordinates)
         {
@@ -33,7 +33,7 @@ namespace SnakeGame.SnakeStructure
         {
             foreach (var segment in snakeTail)
             {
-                MoveByDirection(direction, segment.Coordinates);  
+                MoveByDirection(direction, segment.Coordinates);
             }
         }
 
@@ -44,7 +44,8 @@ namespace SnakeGame.SnakeStructure
 
         public void UpdatePos(IDirection.Direction direction)
         {
-            this.Remove();
+            if (snakeTail.Count > 0)
+                this.Remove();
             ICoordinates newCoords = Head.Coordinates;
 
             MoveByDirection(direction, newCoords);

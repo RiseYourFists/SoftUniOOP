@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnakeGame.EngineHolder;
+using System;
 
 namespace SnakeGame
 {
@@ -7,7 +8,8 @@ namespace SnakeGame
     {
         static void Main()
         {
-
+            var engine = new Engine();
+            engine.Run();
         }
     }
 }

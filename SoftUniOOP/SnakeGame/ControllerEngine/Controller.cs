@@ -38,7 +38,7 @@ namespace SnakeGame.ControllerEngine
                             break;
                     }
                 }
-
+                break;
             }
         }
 

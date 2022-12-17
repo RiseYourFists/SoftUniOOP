@@ -1,33 +1,35 @@
-﻿using SnakeGame.Collisions;
-using SnakeGame.Contracts.Coordination;
+﻿using Snake.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SnakeGame.MapInterpreter
+namespace Snake
 {
-    public class Map : Collision
+    public class Map
     {
-        private readonly List<Collision> tileData;
+        private List<CollisionObject> tiles;
         private readonly string path;
-
         public Map(string mapHolderPath)
         {
             path = mapHolderPath;
-            tileData = new List<Collision>();
+            tiles = new List<CollisionObject>();
         }
 
-        public int Rows { get; private set; }
-        public int Cols { get; private set; }
+        public IReadOnlyCollection<CollisionObject> Tiles => tiles;
 
-        public IReadOnlyCollection<Collision> Tiles => tileData;
+        public int XAxisSize { get; set; }
+        public int YAxisSize { get; set; }
 
-        public void ReadMapData(char wall)
+        public void ReadMapData(char wall, ICycle gameState)
         {
             using (var reader = new StreamReader(path))
             {
                 var mapSize = reader.ReadLine().Split(',');
-                Rows = int.Parse(mapSize[0]);
-                Cols = int.Parse(mapSize[1]);
+                YAxisSize = int.Parse(mapSize[0]);
+                XAxisSize = int.Parse(mapSize[1]);
 
                 string line;
                 int counter = 0;
@@ -37,8 +39,8 @@ namespace SnakeGame.MapInterpreter
                     {
                         if (line[i] == wall)
                         {
-                            ICoordinates coords = new Coordinates(counter, i);
-                            tileData.Add(new Tile(wall, coords));
+                            ICoordinates coords = new Coordinates(i, counter);
+                            tiles.Add(new Tile(coords, gameState, wall));
                         }
                     }
                     counter++;
