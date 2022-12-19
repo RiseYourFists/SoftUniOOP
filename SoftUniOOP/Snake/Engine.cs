@@ -31,8 +31,8 @@ namespace Snake
             {
                 CollisionObject[][] drawableObject =
                 {
-                    new CollisionObject[] { head },
                     snake.Tail,
+                    new CollisionObject[] { head },
                     map.Tiles.ToArray()
                 };
 
