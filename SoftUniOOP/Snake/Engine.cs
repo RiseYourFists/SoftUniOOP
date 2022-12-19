@@ -57,6 +57,7 @@ namespace Snake
                     snake,
                 };
 
+
                 if (food.NewFruit)
                 {
                     snake.Add(controller.Dir);
@@ -69,6 +70,7 @@ namespace Snake
                     controller.Move(moveable);
                 }
 
+                render.NewFrame();
 
                 foreach (var drawable in drawableObject)
                 {
@@ -84,7 +86,6 @@ namespace Snake
 
                 Thread.Sleep(150);
 
-                render.NewFrame();
 
             }
 
