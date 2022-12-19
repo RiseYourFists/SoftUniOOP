@@ -42,7 +42,6 @@ namespace Snake
             tailSegment.ModifyCoords(newSegmentCoords);
             var newSegment = new Tail(tailSegment);
             tail.Enqueue(newSegment);
-            System.Console.Beep();
         }
 
         public void UpdatePos(Direction direction)

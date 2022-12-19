@@ -1,6 +1,8 @@
-﻿using Snake.Interfaces;
+﻿using Snake.Collisions;
+using Snake.Interfaces;
 using System.Linq;
 using System.Threading;
+using System;
 
 namespace Snake
 {
@@ -14,7 +16,7 @@ namespace Snake
             var gameState = new GameCicle();
             var map = new Map("../../../MapHolder/map.txt");
             map.ReadMapData('#', gameState);
-            var render = new Render();
+            var render = new Render(gameState);
 
             var headCoords = new Coordinates(map.XAxisSize / 2, map.YAxisSize / 2);
             var head = new Head(headCoords, gameState, '֍');
@@ -23,13 +25,18 @@ namespace Snake
             var snake = new Snake(head, tail);
             var controller = new Controller();
             var checker = new CollisionChecker();
-
-
-
-            var count = 1;
+            var food = new Food(new Coordinates(0, 0), gameState, 'F', checker);
+            
             while (!gameState.IsOver)
             {
                 CollisionObject[][] drawableObject =
+                {
+                    snake.Tail,
+                    new CollisionObject[] { head, food },
+                    map.Tiles.ToArray(),
+                };
+
+                CollisionObject[][] foodCollidables =
                 {
                     snake.Tail,
                     new CollisionObject[] { head },
@@ -39,8 +46,10 @@ namespace Snake
                 CollisionObject[][] collidables =
                 {
                     snake.Tail,
-                    map.Tiles.ToArray()
+                    map.Tiles.ToArray(),
+                    new CollisionObject[] { food }
                 };
+
 
                 IMoveable[] moveables =
                 {
@@ -48,6 +57,11 @@ namespace Snake
                     snake,
                 };
 
+                if (food.NewFruit)
+                {
+                    snake.Add(controller.Dir);
+                    food.Spawn(map.XAxisSize, map.YAxisSize, foodCollidables);
+                }
 
                 controller.Read();
                 foreach (var moveable in moveables)
@@ -55,25 +69,31 @@ namespace Snake
                     controller.Move(moveable);
                 }
 
+
                 foreach (var drawable in drawableObject)
                 {
                     render.Draw(drawable);
                 }
+
+                render.WriteStats();
 
                 if (checker.HasCollided(collidables, snake.Head.Coordinates))
                 {
                     checker.CollidedObj.OnCollisionEvent();
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(150);
 
                 render.NewFrame();
-                if (count % 10 == 0)
-                {
-                    snake.Add(controller.Dir);
-                }
-                count++;
+
             }
+
+            render.Draw(map.Tiles.ToArray());
+            var gameOverMsg = "Game Over!";
+            render.WriteAt(map.XAxisSize / 2, (map.YAxisSize / 2) - gameOverMsg.Length / 2, gameOverMsg);
+
+            Console.ReadLine();
+            render.NewFrame();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Snake.Interfaces;
+﻿using Snake.Collisions;
+using Snake.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-    public class CollisionChecker
+    public class CollisionChecker : IChecker
     {
         public CollisionObject CollidedObj { get; set; }
 

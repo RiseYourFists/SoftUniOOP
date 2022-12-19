@@ -7,13 +7,21 @@ namespace Snake
         public GameCicle()
         {
             IsOver = false;
+            Points = 0;
         }
 
         public bool IsOver { get; set; }
 
+        public int Points { get; set; }
+
         public void GameOver()
         {
             IsOver = true;
+        }
+
+        public void AddPoints(int amount)
+        {
+            Points += amount;
         }
     }
 }

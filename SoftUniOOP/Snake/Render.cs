@@ -5,6 +5,12 @@ namespace Snake
 {
     public class Render
     {
+        public Render(ICycle gameState)
+        {
+            this.gameState = gameState;
+        }
+
+        ICycle gameState;
         public void NewFrame()
         {
             Console.Clear();
@@ -25,6 +31,17 @@ namespace Snake
                 Console.SetCursorPosition(coordinates.XAxis, coordinates.YAxis);
                 Console.Write(gameObj.DrawableToken);
             }
+        }
+
+        public void WriteStats()
+        {
+            Console.WriteLine($"\nScore: {gameState.Points}");
+        }
+
+        public void WriteAt(int XPos, int YPos, string text)
+        {
+            Console.SetCursorPosition(XPos, YPos);
+            Console.Write(text);
         }
     }
 }

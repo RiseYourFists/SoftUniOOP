@@ -2,7 +2,7 @@
 
 namespace SnakeGame.Collisions
 {
-    public class CollisionChecker: Collision
+    public class CollisionChecker: Collision, IChecker
     {
         public Collision CollidedObj { get; private set; }
 
