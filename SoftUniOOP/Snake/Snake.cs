@@ -14,7 +14,6 @@ namespace Snake
             Head = head;
             tail = new Queue<CollisionObject>();
             this.tailSegment = tailSegment;
-            tail.Enqueue(tailSegment);
         }
 
         public CollisionObject Head { get; private set; }
@@ -57,6 +56,7 @@ namespace Snake
 
         public void UpdatePos(Direction direction)
         {
+            if(tail.Count == 0) return;
             tail.Dequeue();
             var newCoords = new Coordinates(Head.Coordinates);
 

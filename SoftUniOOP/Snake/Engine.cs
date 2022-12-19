@@ -18,7 +18,7 @@ namespace Snake
 
             var headCoords = new Coordinates(map.XAxisSize / 2, map.YAxisSize / 2);
             var head = new Head(headCoords, gameState, '֍');
-            var tailCoords = new Coordinates(headCoords.XAxis--, headCoords.YAxis);
+            var tailCoords = new Coordinates(headCoords.XAxis, headCoords.YAxis);
             var tail = new Tail(tailCoords, gameState, '●');
             var snake = new Snake(head, tail);
             var controller = new Controller();
@@ -45,7 +45,7 @@ namespace Snake
                 IMoveable[] moveables =
                 {
                     head,
-                    snake
+                    snake,
                 };
 
 
