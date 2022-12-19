@@ -89,10 +89,10 @@ namespace Snake
             }
 
             render.Draw(map.Tiles.ToArray());
-            var gameOverMsg = "Game Over!";
-            render.WriteAt(map.XAxisSize / 2, (map.YAxisSize / 2) - gameOverMsg.Length / 2, gameOverMsg);
+            var gameOverMsg = "Game Over! Press any key.";
+            render.WriteAt(map.YAxisSize / 2, (map.XAxisSize / 2) - gameOverMsg.Length / 2, gameOverMsg);
 
-            Console.ReadLine();
+            Console.ReadKey(true);
             render.NewFrame();
         }
     }
