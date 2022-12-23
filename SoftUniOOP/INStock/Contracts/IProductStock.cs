@@ -18,7 +18,7 @@
 
         IProduct FindByLabel(string label);
 
-        IProduct FindMostExpensiveProduct(int count);
+        IEnumerable<IProduct> FindMostExpensiveProduct(int count);
 
         IEnumerable<IProduct> FindAllInRange(decimal lo, decimal hi);
 

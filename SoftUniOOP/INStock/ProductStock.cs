@@ -43,22 +43,25 @@ namespace INStock
         public IProduct FindByLabel(string label)
             => stocks.FirstOrDefault(x => x.Label == label);
 
-        public IProduct FindMostExpensiveProduct(int count)
-            =>
+        public IEnumerable<IProduct> FindMostExpensiveProduct(int count)
+        {
+            var orderedStocks = stocks.OrderByDescending(x => x.Price);
+            IEnumerable<IProduct> products = orderedStocks.Take(count);
+            return products;
+        } 
 
         public IEnumerator<IProduct> GetEnumerator()
         {
-            throw new NotImplementedException();
+            foreach (var item in stocks)
+            {
+                yield return item;
+            }
         }
 
         public bool Remove(IProduct product)
-        {
-            throw new NotImplementedException();
-        }
+            => stocks.Remove(product);
 
         IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+            => GetEnumerator();
     }
 }
