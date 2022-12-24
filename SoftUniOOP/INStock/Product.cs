@@ -1,8 +1,4 @@
 ﻿using INStock.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace INStock
 {
@@ -16,7 +12,17 @@ namespace INStock
 
         public int CompareTo(IProduct other)
         {
-            return 0;
+            var result = this.Label.CompareTo(other.Label);
+            if (result == 0)
+            {
+                result = this.Price.CompareTo(other.Price);
+                if (result == 0)
+                {
+                    result = this.Quantity.CompareTo(other.Quantity);
+                }
+            }
+
+            return result;
         }
     }
 }

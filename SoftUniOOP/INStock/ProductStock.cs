@@ -8,7 +8,7 @@ namespace INStock
 {
     public class ProductStock : IProductStock
     {
-        private List<IProduct> stocks = new List<IProduct>();
+        private readonly List<IProduct> stocks = new List<IProduct>();
 
         public IProduct this[int index] { get => stocks[index]; set => stocks[index] = value; }
 
