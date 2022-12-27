@@ -1,5 +1,4 @@
-﻿
-using Snake.Enumerators;
+﻿using Snake.Enumerators;
 using Snake.Interfaces;
 using System;
 

@@ -15,6 +15,8 @@ namespace Snake
             NewFruit = true;
         }
 
+        public bool NewFruit { get; set; }
+
         public void Spawn(int XDimention, int YDimention, CollisionObject[][] colliders)
         {
             var xCoord = new Random().Next(0, XDimention);
@@ -29,8 +31,6 @@ namespace Snake
 
             NewFruit = false;
         }
-
-        public bool NewFruit { get; set; }
 
         public override void OnCollisionEvent()
         {

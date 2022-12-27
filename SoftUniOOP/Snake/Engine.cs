@@ -1,5 +1,4 @@
-﻿using Snake.Collisions;
-using Snake.Interfaces;
+﻿using Snake.Interfaces;
 using System.Linq;
 using System.Threading;
 using System;
