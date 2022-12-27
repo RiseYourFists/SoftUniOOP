@@ -6,6 +6,7 @@ namespace FluentBuilderInterface
     {
         static void Main(string[] args)
         {
+            //This design approach uses recursive generic inheritance
             var employee =  EmployeeBuilderDirector
                 .NewEmployee
                 .SetName("Bob")
