@@ -121,7 +121,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DesignPatterns", "DesignPat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacetedBuilder", "FacetedBuilder\FacetedBuilder.csproj", "{0F15591A-B636-4AAC-9E16-718FF1FCC3F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuilderInterface", "FluentBuilderInterface\FluentBuilderInterface.csproj", "{190BF67B-9049-4E80-87CD-5E369A1C655A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuilderRecrsivePattern", "FluentBuilderInterface\FluentBuilderRecrsivePattern.csproj", "{190BF67B-9049-4E80-87CD-5E369A1C655A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
