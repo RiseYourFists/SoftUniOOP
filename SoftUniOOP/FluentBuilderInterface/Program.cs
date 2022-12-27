@@ -13,7 +13,15 @@ namespace FluentBuilderInterface
                 .SetSalary(500)
                 .Build();
 
+            var employee2 = EmployeeBuilderDirector
+                .NewEmployee
+                .SetName("Martin")
+                .SetPosition("CEO")
+                .SetSalary(5000)
+                .Build();
+
             Console.WriteLine(employee);
+            Console.WriteLine(employee2);
         }
     }
 }
